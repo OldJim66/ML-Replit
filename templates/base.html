@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% block Head %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% block Resources %}
+            <link rel="preload" href="{{ url_for('static', filename='css/style.css') }}" as="style">
+            <link rel="preload" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" as="style">
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+            <link rel="icon" href="{{ url_for('static', filename='img/LogoJMC.ico') }}">
+            <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+        {% endblock Resources %}
+    {% endblock Head %}
+</head>
+<body>
+    {% block Body %}
+        {% block Header %}
+            <header class="custom-navbar">
+            {% block Navbar %}
+                <nav class="navbar navbar-expand-lg">
+                    <!-- Navbar brand with title visible only on small screens -->
+                    <a class="navbar-brand fetch-link" href="{{ url_for('home') }}">MaximizeLife<span class="d-lg-none" onclick="event.preventDefault(); event.stopPropagation();">-{% block title %}<title></title>{% endblock title %}</span></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <!-- Add 'active' class to nav-item if current page is 'home' -->
+                            <li class="nav-item {% if request.endpoint == 'home' %}active{% endif %}">
+                                <a class="nav-link fetch-link" href="{{ url_for('home') }}">Home</a>
+                            </li>
+                            {% if 'username' in session %}
+                                <!-- Add 'active' class to nav-item if current page is 'logout' -->
+                                <li class="nav-item {% if request.endpoint == 'logout' %}active{% endif %}">
+                                    <a class="nav-link fetch-link" href="{{ url_for('logout') }}">Logout: {{ session['username'] }}</a>
+                                </li>
+                            {% else %}
+                                <!-- Add 'active' class to nav-item if current page is 'login' -->
+                                <li class="nav-item {% if request.endpoint == 'login' %}active{% endif %}">
+                                    <a class="nav-link fetch-link" href="{{ url_for('login') }}">Login</a>
+                                </li>
+                                <!-- Add 'active' class to nav-item if current page is 'register' -->
+                                <li class="nav-item {% if request.endpoint == 'register' %}active{% endif %}">
+                                    <a class="nav-link fetch-link" href="{{ url_for('register') }}">Register</a>
+                                </li>
+                            {% endif %}
+                            <!-- Add 'active' class to nav-item if current page is 'BrowserMemoryDB' -->
+                            <li class="nav-item {% if request.endpoint == 'BrowserMemoryDB' %}active{% endif %}">
+                                <a class="nav-link fetch-link" href="{{ url_for('BrowserMemoryDB') }}">Browser Memory DB</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            {% endblock Navbar %}
+            </header>
+        {% endblock Header %}
+        {% block Messages %}
+            <div class="container flash-messages">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="container flash-messages">
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+            </div>    
+        {% endblock Messages %}
+        
+        {% block content %}
+            <main class="container-fluid py-3 px-3 px-lg-3">
+                <div class="row">
+                    <div class="col-12 col-lg-10 offset-lg-1">
+                        {% block page_content %}{% endblock page_content %}
+                    </div>
+                </div>
+            </main>
+        {% endblock content %}
+        
+        {% block Scripts %}
+            <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/sql-wasm.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/socket.io.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/JMC_Func.js') }}"></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    document.body.classList.add('styles-loaded');
+                });
+            </script>
+        {% endblock Scripts %}
+    {% endblock Body %}
+    {% block Footer %}
+        <footer class="bg-dark text-white text-center py-3"> 
+            <p>© 2020 MaximizeLife App</p>
+        </footer>
+    {% endblock Footer %}
+</body>
+</html>

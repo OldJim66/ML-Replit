@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}
+Home
+{% endblock title %}
+
+{% block page_content %}
+	<h1 class="title"><b><u>Welcome to the MaximizeLife App</u></b></h1>
+    <p class="text-justify">
+        <b>{% if session['username'] %}{{ session['username'] }} ,are{% else %}Are{% endif %} 
+			you ready to maximize your life? </b><br>
+			Before we had the technology to preserve information by writing it down, we needed to learn it by hart.
+			Information that we know by hart influences us, in how we think and act - thats why already in the Bible it says: 
+			<br><b>"Impress my Word in your Hart and Mind" DNT 11:18</b><br>
+			In our modern World any Information is ony one Internet Search away. 
+			There are so many tools out there to write down information, so that we don't need to remember them by Hart any more.
+			This makes us vulnerable to be influenced by short term Information, that floods us by the never ending Stream of Media - that we are exposed to every day.
+			That's is why this "Maximize Life" App was developed - to give you a Tool not to write down information to forget, but to remember.
+			This App will help you to build strong long Term memory's of the information that is valuable to you.
+			Information that you whish, that it influences the way you think and act.
+			Information that helps you to stay on the path that reaches your goals.	
+    </p>
+{% endblock page_content %}
+
+

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}
+Browser Memory DB
+{% endblock title %}
+
+{% block page_content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <button class="btn btn-secondary btn-block" onclick="CreateDB()">Create DB</button>
+        </div>
+        <div class="col-12 col-md-4 mt-2 mt-md-0">
+            <button class="btn btn-info btn-block" onclick="UploadDB()">Upload DB</button>
+        </div>
+        <div class="col-12 col-md-4 mt-2 mt-md-0">
+            <button class="btn btn-success btn-block" onclick="DownloadDB()">Download DB</button>
+        </div>
+    </div>
+</div>
+
+{% endblock page_content %}
+
+

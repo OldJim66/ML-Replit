@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}
+Login
+{% endblock title %}
+
+{% block page_content %}
+<h2 class="mt-4">Login</h2>
+<form id=LoginForm method="POST">
+    <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" class="form-control" required>
+    </div>
+    <button type="button" onclick="submitForm('LoginForm', '/login')">Login</button>
+</form>
+{% endblock page_content %}
